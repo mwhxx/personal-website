@@ -1,0 +1,399 @@
+/* Base reset */
+* {
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  
+}
+
+/* p5.js canvas container (remove if not needed) */
+#sketch-container {
+  width: 100%;
+  height: 700px;
+  position: relative;
+}
+canvas {
+  display: block;
+}
+
+/* Fixed top bar */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* Resume button */
+.top-button {
+  background-color: #8787fa;
+  color: white;
+  border: none;
+  border-radius: 0;
+  height: 100%;
+  padding: 0 36px;
+  font-size: 1rem;
+  cursor: pointer;
+  outline: none;
+  margin-left: auto;
+}
+
+/* Main content */
+main {
+  padding: 0 8%;
+  margin-bottom: 300px;
+}
+
+/* Default gallery title style */
+.gallery-title {
+  text-align: center;
+  font-family: 'Andale Mono', 'Lucida Grande', 'Lucida Sans Unicode', 'Helvetica';
+  font-weight: lighter;
+  margin-top: 120px; /* Large top margin for the first gallery */
+  margin-bottom: 10px;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Second gallery title with less top margin */
+.gallery-title-second {
+  margin-top: 10px; /* reduce the gap before the second gallery */
+}
+
+/* Photo-gallery (grid layout) */
+.photo-gallery {
+  display: grid;
+  grid-gap: 5%;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
+  margin-top: 60px;
+  padding-bottom: 5%;
+}
+
+.photo-gallery img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Horizontal line for each gallery */
+.gallery-line {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 25px auto 20px auto;
+}
+
+/* Responsive breakpoints (optional) */
+@media (min-width: 68vw) {
+  .photo-gallery {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (max-width: 67vw) and (min-width: 40vw) {
+  .photo-gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 39vw) and (min-width: 20vw) {
+  .photo-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 19vw) {
+  .photo-gallery {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/* Each photo item */
+.photo-item {
+  text-align: center;
+}
+.photo-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Captions */
+.photo-caption {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 10px;
+  font-family: 'Andale Mono', 'Lucida Grande', 'Lucida Sans Unicode', 'Helvetica';
+}
+.photo-subcaption {
+  font-size: 0.75rem;
+  color: #959595;
+  margin-top: -5px;
+  font-family: 'Andale Mono', 'Lucida Grande', 'Lucida Sans Unicode', 'Helvetica';
+}
+
+/* Placeholder item to keep 4-column width on large screens */
+.placeholder-item img,
+.placeholder-item p {
+  visibility: hidden; /* keep space, hide content */
+}
+/* hidden-when-not-4 is toggled via JS (display: none) when columns < 4 */
+
+footer {
+  text-align: center;
+  font-size: 0.6rem;
+  color: #666;
+  padding: 20px 0;
+  background-color: #f8f8f8;
+  margin-top: 40px;
+  font-family: 'Andale Mono', 'Lucida Grande', 'Lucida Sans Unicode', 'Helvetica';
+}
+
+#cover-info {
+  display: flex;
+  align-items: flex-start;
+  margin: 20px 0 40px 0;
+  flex-wrap: wrap;
+  gap: 60px;
+}
+
+.about, .social-media {
+  margin-left: 60px;
+}
+
+.about:nth-child(2), 
+.social-media:nth-child(3) {
+  margin-left: 0;
+}
+
+/* Cover title styling */
+.cover-title {
+  font-size: 20px;
+  margin: 0 0 10px;
+  font-weight: lighter;
+  font-family: 'Lucida Sans Unicode', 'Helvetica', 'Andale Mono', 'Lucida Grande';
+}
+
+/* Cover description styling */
+.cover-description {
+  font-size: 12px;
+  margin: 0;
+  max-width: 400px;
+  word-wrap: break-word;
+  text-align: justify;
+  text-align-last: left;
+  font-weight: lighter;
+  font-family: 'Helvetica', 'Andale Mono', 'Lucida Grande';
+  line-height: 1.5;
+}
+
+.cover-link {
+  color: rgb(255, 86, 56);
+  text-decoration: none;
+  font-size: 12px; /* Adjust as needed */
+  display: inline-block;  /* Ensures it appears on a new line */
+  margin-top: 10px; /* Spacing from the description */
+  font-family: 'Lucida Sans Unicode', 'Helvetica', 'Andale Mono', 'Lucida Grande';
+}
+
+/* Contacts Title styling */
+.contacts-title {
+  color: #0e005d;
+  font-size: 12px;
+  margin: 20px 0 10px;
+  font-weight: bold;
+  font-family: 'Lucida Sans Unicode', 'Helvetica', 'Andale Mono', 'Lucida Grande';
+}
+
+/* Contacts Description styling */
+.contacts-description {
+  color: #0e005d;
+  font-size: 12px;
+  margin: 0;
+  max-width: 400px;
+  word-wrap: break-word;
+  text-align: justify;
+  text-align-last: left;
+  font-weight: bold;
+  font-family: 'Lucida Sans Unicode', 'Helvetica', 'Andale Mono', 'Lucida Grande';
+  line-height: 1.5;
+}
+
+.about {
+  margin-left: 60px; /* 左右間距 */
+}
+
+/* About Title styling */
+.about-title {
+  font-size: 20px;
+  margin: 0 0 10px;
+  font-weight: lighter;
+  font-family: 'Helvetica', 'Andale Mono', 'Lucida Grande';
+}
+
+/* About Description styling */
+.about-description {
+  font-size: 12px;
+  margin: 0;
+  max-width: 600px;
+  word-wrap: break-word;
+  text-align: justify;
+  text-align-last: left;
+  font-weight: lighter;
+  font-family: 'Helvetica', 'Andale Mono', 'Lucida Grande';
+  line-height: 1.5;
+}
+
+.social-media {
+  margin-left: 60px;
+  margin-top: -16px;
+}
+
+/* When moved below, make the social media block full width and reset its margins */
+.social-media.move-below {
+  flex-basis: 100%;
+  margin-left: 0;
+  margin-top: 20px; /* adjust as desired */
+}
+
+/* Container for all social icons */
+.social-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  /* Center items if desired; you can change align-items to flex-start if you prefer left alignment */
+  align-items: flex-start;
+}
+
+/* Wrapper for each social icon + label */
+.social-icon-item {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Social icon button (unchanged from your fixed version except for size adjustments) */
+.social-icons a {
+  position: relative;       /* for proper :before positioning */
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  width: 30px;              /* previously adjusted */
+  height: 30px;
+  line-height: 30px;        /* match height for centering */
+  font-size: 14px;          /* adjust as needed */
+  color: #3f345f;
+  margin: 10px;             /* you can adjust margin if needed */
+  border-radius: 50%;
+  box-shadow: 0 5px 25px rgba(93, 70, 232, 0.15);
+  box-sizing: border-box;
+}
+
+/* The animated circle background */
+.social-icons a:before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  border-radius: 50%;
+  border: 1px solid rgba(132, 132, 164, 0.35);
+  animation: focuse 1.5s linear infinite;
+  box-sizing: border-box;
+  white-space: nowrap;  
+}
+
+
+/* The label on the right of each icon */
+.icon-label {
+  font-size: 12px;
+  color: #3f345f;
+  margin-left: 5px;
+  width: 150px; 
+}
+
+/* Hover animation for the icon */
+.social-bar a:hover i,
+.social-icons a:hover i {
+  -webkit-animation: jello-horizontal 0.9s both;
+          animation: jello-horizontal 0.9s both;
+}
+
+/* Keyframes for continuous background animation */
+@keyframes focuse {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  75% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* Keyframes for hover jello-horizontal animation */
+@-webkit-keyframes jello-horizontal {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+            transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+            transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+            transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+            transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+            transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes jello-horizontal {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
