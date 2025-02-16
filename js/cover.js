@@ -3,7 +3,7 @@ new p5(function(p) {
     let baseRectY, currentRectY, targetRectY;
     
     p.preload = function() {
-      coverImg = p.loadImage("/images/artworkicon/cover.png");
+      coverImg = p.loadImage("images/artworkicon/cover.png");
     };
     
     p.setup = function() {
