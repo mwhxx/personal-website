@@ -1,15 +1,22 @@
-/* Base reset */
-* {
-  box-sizing: border-box;
-}
+/* ------------------------------ */
+/* Global Layout & Canvas         */
+/* ------------------------------ */
+
+/* Ensure full height for sticky footer layout */
 html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
   overflow-x: hidden; /* Prevent horizontal scrolling */
-  
 }
 
-/* p5.js canvas container (remove if not needed) */
+/* Make body a flex container */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* p5.js canvas container (optional) */
 #sketch-container {
   width: 100%;
   height: 700px;
@@ -19,13 +26,16 @@ canvas {
   display: block;
 }
 
-/* Fixed top bar */
+/* ------------------------------ */
+/* Top Bar & Resume Button        */
+/* ------------------------------ */
+
 .top-bar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 50px;
+  height: 50px; /* Fixed height */
   background-color: rgba(255, 255, 255, 0.9);
   z-index: 1000;
   display: flex;
@@ -33,7 +43,6 @@ canvas {
   align-items: center;
 }
 
-/* Resume button */
 .top-button {
   background-color: #8787fa;
   color: white;
@@ -44,88 +53,50 @@ canvas {
   font-size: 1rem;
   cursor: pointer;
   outline: none;
-  margin-left: auto;
 }
 
-/* Main content */
-main {
-  padding: 0 8%;
-  margin-bottom: 300px;
+/* ------------------------------ */
+/* Main Content & Gallery         */
+/* ------------------------------ */
+
+.main-content {
+  width: 100%;
+  margin: 0 auto;
 }
 
-/* Default gallery title style */
 .gallery-title {
   text-align: center;
   font-family: 'Andale Mono', 'Lucida Grande', 'Lucida Sans Unicode', 'Helvetica';
   font-weight: lighter;
-  margin-top: 120px; /* Large top margin for the first gallery */
-  margin-bottom: 10px;
+  margin-top: 120px; /* Leaves room for fixed top bar */
+  margin-bottom: -5px;
   font-size: 1rem;
   color: #333;
 }
 
-/* Second gallery title with less top margin */
 .gallery-title-second {
-  margin-top: 10px; /* reduce the gap before the second gallery */
+  margin-top: 10px;
 }
 
-/* Photo-gallery (grid layout) */
-.photo-gallery {
-  display: grid;
-  grid-gap: 5%;
-  grid-template-columns: repeat(4, 1fr);
-  justify-content: center;
-  margin-top: 60px;
-  padding-bottom: 5%;
-}
-
-.photo-gallery img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-/* Horizontal line for each gallery */
+/* Gallery-line matches left/right margin of 15px */
 .gallery-line {
-  width: 100%;
+  width: calc(100% - 30px);
+  margin: 25px 15px 20px;
   border: none;
   border-top: 1px solid #ccc;
-  margin: 25px auto 20px auto;
 }
 
-/* Responsive breakpoints (optional) */
-@media (min-width: 68vw) {
-  .photo-gallery {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-@media (max-width: 67vw) and (min-width: 40vw) {
-  .photo-gallery {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-@media (max-width: 39vw) and (min-width: 20vw) {
-  .photo-gallery {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 19vw) {
-  .photo-gallery {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-
-/* Each photo item */
+/* Example Photo Items */
 .photo-item {
   text-align: center;
+  margin-bottom: 30px;
+  padding: 30px;
 }
 .photo-item img {
   width: 100%;
   height: auto;
   object-fit: cover;
 }
-
-/* Captions */
 .photo-caption {
   font-size: 0.9rem;
   color: #666;
@@ -139,85 +110,95 @@ main {
   font-family: 'Andale Mono', 'Lucida Grande', 'Lucida Sans Unicode', 'Helvetica';
 }
 
-/* Placeholder item to keep 4-column width on large screens */
-.placeholder-item img,
-.placeholder-item p {
-  visibility: hidden; /* keep space, hide content */
-}
-/* hidden-when-not-4 is toggled via JS (display: none) when columns < 4 */
+/* ------------------------------ */
+/* Footer                         */
+/* ------------------------------ */
 
-footer {
+.full-width-footer {
+  width: 100%;
+  height: 60px;
+  background-color: #f8f8f8;
   text-align: center;
+  line-height: 60px;
+  margin-top: 40px;
   font-size: 0.6rem;
   color: #666;
-  padding: 20px 0;
-  background-color: #f8f8f8;
-  margin-top: 40px;
   font-family: 'Andale Mono', 'Lucida Grande', 'Lucida Sans Unicode', 'Helvetica';
 }
 
+/* ------------------------------ */
+/* Cover Info Section (3 columns) */
+/* ------------------------------ */
+
+/*
+  #cover-info is a flex container with a 15px gap and 15px left/right margin 
+  to align with the gallery-line.
+*/
 #cover-info {
   display: flex;
-  align-items: flex-start;
-  margin: 20px 0 40px 0;
   flex-wrap: wrap;
-  gap: 60px;
+  gap: 45px;
+  margin: 20px 15px 40px;
+  width: calc(100% - 30px);
+  align-items: stretch;
 }
 
-.about, .social-media {
-  margin-left: 60px;
+/* Base style for each cover card */
+.cover-card {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
 }
 
-.about:nth-child(2), 
-.social-media:nth-child(3) {
-  margin-left: 0;
+/* Remove default padding in .card-body */
+.cover-card .card-body {
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
-/* Cover title styling */
-.cover-title {
+/* Headings & Paragraphs in cover cards */
+.cover-card .card-title {
   font-size: 20px;
-  margin: 0 0 10px;
+  margin: 0 0 10px 0;
   font-weight: lighter;
   font-family: 'Lucida Sans Unicode', 'Helvetica', 'Andale Mono', 'Lucida Grande';
 }
 
-/* Cover description styling */
-.cover-description {
+.cover-card .card-text {
   font-size: 12px;
-  margin: 0;
-  max-width: 400px;
-  word-wrap: break-word;
+  line-height: 1.5;
+  font-weight: lighter;
+  font-family: 'Helvetica', 'Lucida Sans Unicode', 'Andale Mono', 'Lucida Grande';
   text-align: justify;
   text-align-last: left;
-  font-weight: lighter;
-  font-family: 'Helvetica', 'Andale Mono', 'Lucida Grande';
-  line-height: 1.5;
+  margin: 0;
 }
 
-.cover-link {
+/* Small link text */
+.card-link {
   color: rgb(255, 86, 56);
   text-decoration: none;
-  font-size: 12px; /* Adjust as needed */
-  display: inline-block;  /* Ensures it appears on a new line */
-  margin-top: 10px; /* Spacing from the description */
+  font-size: 12px;
+  display: inline-block;
+  margin-top: 10px;
   font-family: 'Lucida Sans Unicode', 'Helvetica', 'Andale Mono', 'Lucida Grande';
 }
 
-/* Contacts Title styling */
+/* Contacts title and description */
 .contacts-title {
   color: #0e005d;
   font-size: 12px;
-  margin: 20px 0 10px;
+  margin-top: 10px;
   font-weight: bold;
   font-family: 'Lucida Sans Unicode', 'Helvetica', 'Andale Mono', 'Lucida Grande';
 }
 
-/* Contacts Description styling */
 .contacts-description {
   color: #0e005d;
   font-size: 12px;
-  margin: 0;
-  max-width: 400px;
+  margin-top: 10px;
   word-wrap: break-word;
   text-align: justify;
   text-align-last: left;
@@ -226,107 +207,140 @@ footer {
   line-height: 1.5;
 }
 
-.about {
-  margin-left: 60px; /* 左右間距 */
+
+/* Flex-basis ratio */
+.pdf-card {
+  flex: 0 0 28%;
+}
+.about-card {
+  flex: 0 0 50%;
+}
+.social-card {
+  flex: 0 0 10%;
+  margin-top: -23px;
 }
 
-/* About Title styling */
-.about-title {
-  font-size: 20px;
-  margin: 0 0 10px;
-  font-weight: lighter;
-  font-family: 'Helvetica', 'Andale Mono', 'Lucida Grande';
+/* ------------------------------ */
+/* Social Media Icon Styles       */
+/* (From the provided snippet; DO NOT DELETE/CHANGE) */
+/* ------------------------------ */
+/* ------------------------------ */
+/* Social Media Icon Styles       */
+/* (Do NOT delete or change these) */
+/* ------------------------------ */
+
+.social-bar {
+  display: flex;
+  border-radius: 10px;
+  background: none;
+  box-shadow: none;
+  border: none;
 }
 
-/* About Description styling */
-.about-description {
-  font-size: 12px;
-  margin: 0;
-  max-width: 600px;
-  word-wrap: break-word;
-  text-align: justify;
-  text-align-last: left;
-  font-weight: lighter;
-  font-family: 'Helvetica', 'Andale Mono', 'Lucida Grande';
-  line-height: 1.5;
+.iconpad {
+  padding: 12px 0;
+  width: 100%;
 }
 
-.social-media {
-  margin-left: 60px;
-  margin-top: -16px;
-}
-
-/* When moved below, make the social media block full width and reset its margins */
-.social-media.move-below {
-  flex-basis: 100%;
-  margin-left: 0;
-  margin-top: 20px; /* adjust as desired */
-}
-
-/* Container for all social icons */
 .social-icons {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  /* Center items if desired; you can change align-items to flex-start if you prefer left alignment */
-  align-items: flex-start;
+  align-items: flex-start !important;
+  margin-left: 0 !important;
 }
 
-/* Wrapper for each social icon + label */
-.social-icon-item {
-  display: inline-flex;
-  align-items: center;
+@media (max-width: 1370px) {
+  .social-icons {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 50px;
+    transform: translateX(-7px);
+  }
 }
 
-/* Social icon button (unchanged from your fixed version except for size adjustments) */
-.social-icons a {
-  position: relative;       /* for proper :before positioning */
-  display: inline-block;
-  text-align: center;
-  vertical-align: middle;
-  width: 30px;              /* previously adjusted */
-  height: 30px;
-  line-height: 30px;        /* match height for centering */
-  font-size: 14px;          /* adjust as needed */
-  color: #3f345f;
-  margin: 10px;             /* you can adjust margin if needed */
+@media (max-width: 1370px) {
+  .about-card {
+    flex: 1 1 auto;
+    max-width: calc(100% - 35%);
+  }
+}
+
+@media (max-width: 872px) {
+  .pdf-card{
+    flex: 1 1 auto;
+    max-width: calc(100%);
+  }
+  .about-card {
+    flex: 1 1 auto;
+    max-width: calc(100%);
+  }
+}
+
+@media (max-width: 872px) {
+  .social-icons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 200px;
+    row-gap: 0; 
+    width: 100%;
+    row-gap: 0;
+    box-sizing: border-box;
+    margin-top: 20px;
+  }
+}
+
+.slider-nav-item {
+  position: relative;
+  flex-grow: 0;
+  flex-shrink: 0;
   border-radius: 50%;
-  box-shadow: 0 5px 25px rgba(93, 70, 232, 0.15);
-  box-sizing: border-box;
+  text-align: center;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.4s ease;
 }
 
-/* The animated circle background */
-.social-icons a:before {
-  content: "";
+/* Updated smaller dimensions for social icons */
+.social-icons a {
+  border-radius: 50px;
+  color: #3f345f;
+  display: inline-block;
+  line-height: 28px;  /* reduced from 32px */
+  height: 30px;       /* reduced from 35px */
+  width: 30px;        /* reduced from 35px */
+  box-shadow: 0 4px 20px rgba(93, 70, 232, 0.15); /* smaller shadow */
+  margin: 10px;
+  font-size: 14px;    /* reduced from 16px */
+}
+
+.slider-nav-item:before {
   position: absolute;
+  content: "";
+  height: calc(100% + 16px);
+  width: calc(100% + 16px);
   top: -8px;
   left: -8px;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
   border-radius: 50%;
   border: 1px solid rgba(132, 132, 164, 0.35);
-  animation: focuse 1.5s linear infinite;
-  box-sizing: border-box;
-  white-space: nowrap;  
+  animation: 1.5s linear infinite focuse;
 }
 
+.social-icon-item {
+  display: flex;
+  flex-wrap: nowrap;  /* Prevent children from wrapping */
+  align-items: center;
+  margin-bottom: 8px;
+}
 
-/* The label on the right of each icon */
 .icon-label {
   font-size: 12px;
   color: #3f345f;
   margin-left: 5px;
-  width: 150px; 
+  white-space: nowrap;       /* Prevent wrapping */
+  overflow: hidden;          /* Hide overflow if it gets too long */
+  text-overflow: ellipsis;   /* Optionally add ellipsis for overflow */
 }
 
-/* Hover animation for the icon */
-.social-bar a:hover i,
-.social-icons a:hover i {
-  -webkit-animation: jello-horizontal 0.9s both;
-          animation: jello-horizontal 0.9s both;
-}
-
-/* Keyframes for continuous background animation */
 @keyframes focuse {
   0% {
     transform: scale(0.8);
@@ -342,7 +356,6 @@ footer {
   }
 }
 
-/* Keyframes for hover jello-horizontal animation */
 @-webkit-keyframes jello-horizontal {
   0% {
     -webkit-transform: scale3d(1, 1, 1);
@@ -396,4 +409,20 @@ footer {
   100% {
     transform: scale3d(1, 1, 1);
   }
+}
+
+.slider-nav-item:before {
+  position: absolute;
+  content: "";
+  height: calc(100% + 16px);
+  width: calc(100% + 16px);
+  top: -8px;
+  left: -8px;
+  border-radius: 50%;
+  border: 1px solid rgba(132, 132, 164, 0.35);
+  animation: 1.5s linear infinite focuse;
+}
+
+.social-bar a:hover i {
+  animation: jello-horizontal 0.9s both;
 }
