@@ -8,7 +8,7 @@ function updateCoverInfoWidth() {
 
 // Delay initial update to ensure gallery-line is fully rendered
 window.addEventListener('load', function() {
-  setTimeout(updateCoverInfoWidth, 100); // 100ms delay; adjust if needed
+  setTimeout(updateCoverInfoWidth, 0); // 100ms delay; adjust if needed
 });
 
 window.addEventListener('resize', updateCoverInfoWidth);
